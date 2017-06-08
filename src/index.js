@@ -1,4 +1,6 @@
 
+const {select, reject, map, tap} = require('./processors');
+
 class Terible {
   constructor(source) {
     this.source = source;
@@ -15,31 +17,19 @@ class Terible {
   }
 
   select(f) {
-    return this.pipe(function *(source) {
-      for(let item of source) {
-        if(f(item)) {
-          yield item;
-        }
-      }
-    })
+    return this.pipe(select(f));
   }
 
   reject(f) {
-    return this.pipe(function *(source) {
-      for(let item of source) {
-        if(!f(item)) {
-          yield item;
-        }
-      }
-    });
+    return this.pipe(reject(f));
   }
 
   map(f) {
-    return this.pipe(function *(source) {
-      for(let item of source) {
-        yield f(item);
-      }
-    })
+    return this.pipe(map(f));
+  }
+
+  tap(f) {
+    return this.pipe(tap(f));
   }
 
   reduce(f, initialValue) {
@@ -57,15 +47,6 @@ class Terible {
     for(let item of this) {
       f(item);
     }
-  }
-
-  tap(f) {
-    return this.pipe(function*(source) {
-      for(let item of source) {
-        f(item);
-        yield item;
-      }
-    });
   }
 
 }
