@@ -1,6 +1,6 @@
 {
   "name": "terible",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "A terrible library for iterators",
   "main": "src/index.js",
   "scripts": {
