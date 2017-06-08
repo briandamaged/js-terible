@@ -53,6 +53,21 @@ class Terible {
     return result;
   }
 
+  each(f) {
+    for(let item of this) {
+      f(item);
+    }
+  }
+
+  tap(f) {
+    return this.pipe(function*(source) {
+      for(let item of source) {
+        f(item);
+        yield item;
+      }
+    });
+  }
+
 }
 
 
@@ -61,6 +76,7 @@ const p = Terible.prototype;
 Object.assign(p, {
   [Symbol.iterator]: p.iter,
   filter: p.select,
+  forEach: p.each,
 });
 
 
