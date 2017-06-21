@@ -1,5 +1,7 @@
 
-const {select, reject, map, withIndex, tap} = require('./processors');
+const {select, reject, map, tap} = require('./processors');
+
+const {withIndex} = require('./generators');
 
 class Terible {
   constructor(source) {
@@ -29,7 +31,7 @@ class Terible {
   }
 
   withIndex() {
-    return this.pipe(withIndex());
+    return this.pipe(withIndex);
   }
 
   tap(f) {
