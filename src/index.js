@@ -1,5 +1,5 @@
 
-const {select, reject, map, tap} = require('./processors');
+const {select, reject, map, tap, limit} = require('./processors');
 
 const {withIndex} = require('./generators');
 
@@ -30,12 +30,16 @@ class Terible {
     return this.pipe(map(f));
   }
 
+  tap(f) {
+    return this.pipe(tap(f));
+  }
+
   withIndex() {
     return this.pipe(withIndex);
   }
 
-  tap(f) {
-    return this.pipe(tap(f));
+  limit(n) {
+    return this.pipe(limit(n));
   }
 
   reduce(f, initialValue) {

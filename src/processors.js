@@ -1,4 +1,6 @@
 
+const {withIndex} = require('./generators');
+
 function select(f) {
   return function *(source) {
     for(let item of source) {
@@ -36,7 +38,24 @@ function tap(f) {
   }
 }
 
+
+function limit(n) {
+  return function*(source) {
+    for(let {index, value} of withIndex(source)) {
+      if(index < n) {
+        yield value;
+      } else {
+        break;
+      }
+    }
+  }
+}
+
+
+
 exports.select = select;
 exports.reject = reject;
 exports.map = map;
 exports.tap = tap;
+
+exports.limit = limit;
