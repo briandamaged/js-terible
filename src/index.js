@@ -1,5 +1,8 @@
 
-const {select, reject, map, tap, limit} = require('./processors');
+const {
+  select, reject, map, tap, limit,
+  eachSlice,
+} = require('./processors');
 
 const {withIndex} = require('./generators');
 
@@ -57,6 +60,10 @@ class Terible {
     for(let item of this) {
       f(item);
     }
+  }
+
+  eachSlice(n) {
+    return this.pipe(eachSlice(n));
   }
 
 }

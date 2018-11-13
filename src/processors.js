@@ -52,10 +52,35 @@ function limit(n) {
 }
 
 
+function eachSlice(n) {
+  return function*(source) {
+    const iter = source[Symbol.iterator]();
+
+    while(true) {
+      const buffer = [];
+      for(let i = 0; i < n; ++i) {
+        const n = iter.next();
+        if(n.done) {
+          if(buffer.length > 0) {
+            yield buffer;
+          }
+          return;
+        } else {
+          buffer.push(n.value);
+        }
+
+      }
+
+      yield buffer;
+    }
+  }
+}
+
 
 exports.select = select;
 exports.reject = reject;
 exports.map = map;
 exports.tap = tap;
+exports.eachSlice = eachSlice;
 
 exports.limit = limit;
