@@ -52,7 +52,7 @@ function limit(n) {
 }
 
 
-function eachSlice(n) {
+function slicesOfSize(n) {
   return function*(source) {
     const iter = source[Symbol.iterator]();
 
@@ -77,10 +77,11 @@ function eachSlice(n) {
 }
 
 
+
 exports.select = select;
 exports.reject = reject;
 exports.map = map;
 exports.tap = tap;
-exports.eachSlice = eachSlice;
+exports.slicesOfSize = slicesOfSize;
 
 exports.limit = limit;
