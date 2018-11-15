@@ -1,5 +1,6 @@
 
 const {withIndex} = require('./generators');
+const {isPlural} = require('./predicates');
 
 function select(f) {
   return function *(source) {
@@ -78,10 +79,22 @@ function slicesOfSize(n) {
 
 
 
+function* flatten(source) {
+  for(const item of source) {
+    if(isPlural(item)) {
+      yield* flatten(item);
+    } else {
+      yield item;
+    }
+  }
+}
+
+
 exports.select = select;
 exports.reject = reject;
 exports.map = map;
 exports.tap = tap;
 exports.slicesOfSize = slicesOfSize;
+exports.flatten = flatten;
 
 exports.limit = limit;

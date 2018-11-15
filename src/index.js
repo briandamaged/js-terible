@@ -1,7 +1,7 @@
 
 const {
   select, reject, map, tap, limit,
-  slicesOfSize,
+  slicesOfSize, flatten,
 } = require('./processors');
 
 const {withIndex} = require('./generators');
@@ -66,6 +66,14 @@ class Terible {
     return this.pipe(slicesOfSize(n));
   }
 
+  flatten() {
+    return this.pipe(flatten);
+  }
+
+
+  toArray() {
+    return Array.from(this);
+  }
 }
 
 
